@@ -1,12 +1,10 @@
 import React from "react";
 import cn from "classnames";
 
-import { InputProps } from "./Input.props";
+import { TextareaProps } from "./Textarea.props";
 
-import style from "./Input.module.css";
+import style from "./Textarea.module.css";
 
-export const Input = ({ className, ...props }: InputProps) => {
-  return (
-    <input type="text" className={cn(className, style.input)} {...props} />
-  );
+export const Textarea = ({ className, ...props }: TextareaProps) => {
+  return <textarea className={cn(className, style.input)} {...props} />;
 };

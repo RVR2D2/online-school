@@ -1,27 +1,21 @@
-import React from "react";
+import { CardProps } from "./Card.props";
+import styles from "./Card.module.css";
 import cn from "classnames";
 
-import { PProps } from "./P.props";
-
-import style from "./P.module.css";
-
-export const P = ({
-  size = "m",
+export const Card = ({
+  color = "white",
   children,
   className,
   ...props
-}: PProps): JSX.Element => {
+}: CardProps): JSX.Element => {
   return (
-    <p
-      className={cn(style.p, className, {
-        [style.s]: size === "s",
-        [style.m]: size === "m",
-        [style.l]: size === "l",
+    <div
+      className={cn(styles.card, className, {
+        [styles.blue]: color == "blue",
       })}
       {...props}
     >
-      {" "}
       {children}
-    </p>
+    </div>
   );
 };

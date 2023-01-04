@@ -1,5 +1,12 @@
-const Input = () => {
-  return <input />;
-};
+import React from "react";
+import cn from "classnames";
 
-export default Input;
+import { InputProps } from "./Input.props";
+
+import style from "./Input.module.css";
+
+export const Input = ({ className, ...props }: InputProps) => {
+  return (
+    <input type="text" className={cn(className, style.input)} {...props} />
+  );
+};

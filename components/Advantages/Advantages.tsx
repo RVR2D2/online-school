@@ -1,62 +1,22 @@
-import { Card } from "../Card/Card";
-
-import { HhDataProps } from "./HhData.props";
-import style from "./HhData.module.css";
 import cn from "classnames";
 
-import RateIco from "../../assets/icons/rateIco.svg";
-import { priceRu } from "../../helpers/helpers";
+import { AdvantagesProps } from "./Advantages.props";
+import style from "./Advantages.module.css";
 
-export const HhData = ({
-  count,
-  juniorSalary,
-  middleSalary,
-  seniorSalary,
-}: HhDataProps): JSX.Element => {
+import CheckIco from "../../assets/icons/check.svg";
+
+export const Advantages = ({ advantages }: AdvantagesProps): JSX.Element => {
   return (
-    <div className={style.hh}>
-      <Card className={style.count}>
-        <div className={style.title}>Всего вакансий</div>
-        <div className={style.countValue}>{count}</div>
-      </Card>
+    <>
+      {advantages.map((a) => (
+        <div key={a._id} className={style.advantage}>
+          <CheckIco />
+          <div className={style.title}>{a.title}</div>
 
-      <Card className={style.salary}>
-        <div>
-          <div className={style.title}>Начальный</div>
-          <div className={style.salaryValue}>
-            {priceRu(juniorSalary * 6.53)}
-          </div>
-          <div className={style.rate}>
-            <RateIco className={style.filled} />
-            <RateIco />
-            <RateIco />
-          </div>
+          <hr className={style.vline} />
+          <div> {a.description}</div>
         </div>
-
-        <div>
-          <div className={style.title}>Средний</div>
-          <div className={style.salaryValue}>
-            {priceRu(middleSalary * 6.53)}
-          </div>
-          <div className={style.rate}>
-            <RateIco className={style.filled} />
-            <RateIco className={style.filled} />
-            <RateIco />
-          </div>
-        </div>
-
-        <div>
-          <div className={style.title}>Профессионал</div>
-          <div className={style.salaryValue}>
-            {priceRu(seniorSalary * 6.53)}
-          </div>
-          <div className={style.rate}>
-            <RateIco className={style.filled} />
-            <RateIco className={style.filled} />
-            <RateIco className={style.filled} />
-          </div>
-        </div>
-      </Card>
-    </div>
+      ))}
+    </>
   );
 };

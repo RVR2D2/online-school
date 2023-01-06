@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import Image from "next/image";
 import cn from "classnames";
 
-import { Card, Rating, Tag, Button, Divider, Review } from "../../components";
+import {
+  Card,
+  Rating,
+  Tag,
+  Button,
+  Divider,
+  Review,
+  ReviewForm,
+} from "../../components";
 
 import { ProductProps } from "./Products.props";
 import style from "./Products.module.css";
@@ -102,8 +110,12 @@ export const Products = ({
         })}
       >
         {product.reviews.map((r) => (
-          <Review key={r._id} review={r} />
+          <>
+            <Review key={r._id} review={r} />
+            <Divider />
+          </>
         ))}
+        <ReviewForm productId={product._id} />
       </Card>
     </>
   );

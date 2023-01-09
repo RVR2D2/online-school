@@ -7,11 +7,20 @@ import style from './Textarea.module.css'
 
 export const Textarea = forwardRef(
 	(
-		{ className, ...props }: TextareaProps,
+		{ className, error, ...props }: TextareaProps,
 		ref: ForwardedRef<HTMLTextAreaElement>
 	) => {
 		return (
-			<textarea className={cn(className, style.input)} ref={ref} {...props} />
+			<div className={cn(style.textareaWrapper, className)}>
+				<textarea
+					className={cn(style.textarea, {
+						[style.error]: error,
+					})}
+					ref={ref}
+					{...props}
+				/>
+				{error && <span className={style.errorMessage}>{error.message}</span>}
+			</div>
 		)
 	}
 )

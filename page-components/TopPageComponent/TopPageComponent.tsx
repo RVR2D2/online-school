@@ -42,7 +42,9 @@ export const TopPageComponent = ({
       </div>
       <div>
         {sortedProducts &&
-          sortedProducts.map((p) => <Products key={p._id} product={p} />)}
+          sortedProducts.map((p) => (
+            <Products layout key={p._id} product={p} />
+          ))}
       </div>
 
       <div className={style.hhTitle}>

@@ -32,7 +32,7 @@ export const Menu = () => {
   const variantsChildren = {
     visible: {
       opacity: 1,
-      height: 31,
+      height: 29,
     },
     hidden: {
       opacity: 0,

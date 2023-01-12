@@ -7,6 +7,7 @@ import Sort from "../../components/Sort/Sort";
 import { SortEnum } from "../../components/Sort/Sort.props";
 import { useEffect, useReducer } from "react";
 import { sortReducer } from "./sort.reducer";
+import { useScrollY } from "../../hooks/useScrollY";
 
 export const TopPageComponent = ({
   page,
@@ -20,6 +21,8 @@ export const TopPageComponent = ({
       sort: SortEnum.Rating,
     }
   );
+
+  const y = useScrollY();
 
   const setSort = (sort: SortEnum) => {
     dispatchSort({ type: sort });

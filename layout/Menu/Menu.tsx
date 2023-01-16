@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { KeyboardEventHandler, useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import cn from "classnames";
@@ -52,6 +52,13 @@ export const Menu = () => {
       );
   };
 
+  const openSecondLevelKey = (key: KeyboardEvent, secondCategory: string) => {
+    if (key.code === "Space" || key.code === "Enter") {
+      key.preventDefault();
+      openSecondLevel(secondCategory);
+    }
+  };
+
   const buildFirstLevel = () => {
     return (
       <>
@@ -86,8 +93,13 @@ export const Menu = () => {
           return (
             <div key={m._id.secondCategory}>
               <div
+                tabIndex={0}
                 className={style.secondLevel}
                 onClick={() => openSecondLevel(m._id.secondCategory)}
+                //@ts-ignore
+                onKeyDown={(key: KeyboardEvent): void =>
+                  openSecondLevelKey(key, m._id.secondCategory)
+                }
               >
                 {m._id.secondCategory}
               </div>
@@ -98,7 +110,7 @@ export const Menu = () => {
                 animate={m.isOpened ? "visible" : "hidden"}
                 className={cn(style.secondLevelBlock)}
               >
-                {buildThirdLevel(m.pages, menuItem.route)}
+                {buildThirdLevel(m.pages, menuItem.route, m.isOpened ?? false)}
               </motion.div>
             </div>
           );
@@ -106,10 +118,15 @@ export const Menu = () => {
       </div>
     );
   };
-  const buildThirdLevel = (pages: PageItem[], route: string) => {
+  const buildThirdLevel = (
+    pages: PageItem[],
+    route: string,
+    isOpened: boolean
+  ) => {
     return pages.map((p) => (
       <motion.div key={p._id} variants={variantsChildren}>
         <Link
+          tabIndex={isOpened ? 0 : -1}
           href={`/${route}/${p.alias}`}
           className={cn(style.thirdLevel, {
             [style.thirdLevelActive]: `/${route}/${p.alias}` === router.asPath,
